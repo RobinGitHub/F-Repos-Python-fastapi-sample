@@ -1,0 +1,8 @@
+.venv/
+logs
+packages.zip
+shllm/fun_asr/models
+__pycache__
+*.pyo
+dist/
+.devcontainer/
