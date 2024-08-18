@@ -1,6 +1,5 @@
 #!/user/bin/env python3
 # -*- coding: utf-8 -*-
-import os
 
 debug = True
 # 修改代码时自动重启
@@ -9,8 +8,8 @@ reload = True
 reload_engine = 'inotify'
 
 # 监听内网端口 绑定与Nginx通信的端口
-bind = f'0.0.0.0:8000'
-# bind = 'unix:/programs/program-files/zy.ai/gunicorn.sock'
+bind = '127.0.0.1:8000'
+# bind = 'unix:/programs/program-files/zy.ai/gunicorn.py.sock'
 
 # 工作目录
 chdir = './'
@@ -27,9 +26,10 @@ backlog = 512
 # 超时时间
 timeout = 120
 
-# 设置守护进程,将进程交给 supervisor 管理；如果设置为 True 时，supervisor 启动日志为：
-# gave up: fastapi_server entered FATAL state, too many start retries too quickly
-# 则需要将此改为: False
+# 守护进程"（daemon）指的是将进程运行在后台的模式。简单来说，设置守护进程为 True 会使 Gunicorn 以后台进程的方式运行，
+# 通常不依赖于终端或用户的会话。守护进程在后台执行，不会直接与用户交互。
+# 适用场景: 适合那些不需要与终端交互的环境，例如生产环境。
+# 测试则需要将此改为: False
 daemon = True
 
 # 工作模式协程
@@ -39,7 +39,7 @@ worker_class = 'uvicorn.workers.UvicornWorker'
 worker_connections = 2000
 
 # 设置进程文件目录
-pidfile = './logs/gunicorn.pid'
+pidfile = './logs/gunicorn.py.pid'
 
 # 设置访问日志和错误信息日志路径
 accesslog = './logs/gunicorn_access.log'
@@ -62,11 +62,11 @@ loglevel = 'debug'
 # pythonpath = '/programs/program-files/zy.ai/.venv/lib/python3.12/site-packages'
 
 
-# pstree -ap|grep gunicorn
+# pstree -ap|grep gunicorn.py
 
 # 执行命令
-# gunicorn -c gunicorn.py shllm.main:app
-# gunicorn -c gunicorn.py shllm.main:app -k uvicorn.workers.UvicornWorker
+# gunicorn.py -c gunicorn.py.conf.py shllm.main:app
+# gunicorn.py -c gunicorn.py.conf.py shllm.main:app -k uvicorn.workers.UvicornWorker
 
 # 自动执行
 # 使用 supervisor
@@ -74,3 +74,5 @@ loglevel = 'debug'
 # 参考资料：
 # https://www.jianshu.com/p/bbd0b4cfcac9
 # https://www.cnblogs.com/tk091/archive/2014/07/22/3859514.html
+
+
