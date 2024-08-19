@@ -21,7 +21,17 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
 
 # 拷贝代码
-COPY ./app /app
+ENV PYTHONPATH=/app
+
+COPY ./scripts/ /app/
+
+COPY ./alembic.ini /app/
+
+COPY ./prestart.sh /app/
+
+COPY ./tests-start.sh /app/
+
+COPY ./app /app/app
 
 
 # 创建相关目录

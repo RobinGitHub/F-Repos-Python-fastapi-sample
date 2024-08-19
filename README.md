@@ -4,6 +4,7 @@
 
 1. 先看 https://github.com/tiangolo/uvicorn-gunicorn-docker
 2. 再看 https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker
+3. 项目模板 https://github.com/fastapi/full-stack-fastapi-template
 
 初步结论：
 1. 目前项目基于poetry 创建
